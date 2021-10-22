@@ -1,4 +1,3 @@
-## Name:  Eleni Partakki
 ## Resources: [C = (P+k)mod26], [C = (P-k)mod26]
 
 # Create encryption function to encrypt a message using a key [C = (P+k)mod26]
@@ -46,7 +45,7 @@ print("~~~Now, you can attempt to decrypt a message!~~~")
 print("")
 message = input("Enter message to decrypt: ")
 
-#Makes everything uppercase to avoid lowercase cases
+# Makes everything uppercase to avoid lowercase cases
 message = message.upper()
 
 k = int(input("Enter Caesar shift number: "))
