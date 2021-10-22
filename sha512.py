@@ -1,26 +1,12 @@
-#!/usr/bin/env python3
-
-## sha512.py
- 
-## Name:  Eleni Partakki
-## Peer: N/A
-## Resources:
-## a. T/A hours to help me debug - turns out I had a typo:(
-## b. I utilized the code from sha256.py that was provided and the instructions
-## c. Used the terminal and cd Desktop to test my sha512 in the input.txt and output.txt as suggested by Adriana (T/A)
-
-
 import sys
 from BitVector import *
 
 def sha512(input_bv):
-    '''
-    Calculate the SHA512 hash of a given input bitvector
-    '''
+    
+    # Calculate the SHA512 hash of a given input bitvector
     
     # The hash buffer with 8 64-bit words
-    # Step 3: Initialize hash buffer
-    #   A 512-bit buffer is used to hold intermediate and final results of the hash funciton
+    # A 512-bit buffer is used to hold intermediate and final results of the hash funciton
     h0 = BitVector(hexstring="6a09e667f3bcc908")
     h1 = BitVector(hexstring="bb67ae8584caa73b")
     h2 = BitVector(hexstring="3c6ef372fe94f82b")
@@ -57,10 +43,8 @@ def sha512(input_bv):
     
     # Step 1: Append padding bits
     length = len(input_bv)
-    # TODO1: create a padding. 
-    #   the number of padding bits is in the range of 1 to 1024. 
-    #   the padding consists of a single 1 bit followed by the necessary number of 0 bits
-    #   write your code below.
+    # Create a padding. The number of padding bits is in the range of 1 to 1024. 
+    # The padding consists of a single 1 bit followed by the necessary number of 0 bits.
     bv_with_1 = input_bv + BitVector(bitstring="1")
     length1 = len(bv_with_1)
     #what here?v
@@ -80,12 +64,11 @@ def sha512(input_bv):
     words = [None]*80
 
     # Step 4: Process message in 1024-bit blocks
-    #   Break the message into blocks 
-    #   and Loop through blocks: 
+    # Break the message into blocks and Loop through blocks: 
     for n in range(0, len(bv_with_length), 1024):
         block = bv_with_length[n:n+1024]
 
-        # Step 4-1: Generate the message schedule: each work is 64-bits
+        # Step 4-a: Generate the message schedule: each work is 64-bits
         words[0:16] = [block[i:i+64] for i in range(0, 1024, 64)]
 
 
@@ -104,14 +87,14 @@ def sha512(input_bv):
 
         a,b,c,d,e,f,g,h = h0,h1,h2,h3,h4,h5,h6,h7
 
-        # Step 4-2: Round based processing
+        # Step 4-b: Round based processing
         for i in range(80):
             ch = (e & f) ^ ((~e) & g)
             maj = (a & b) ^ (a & c) ^ (b & c)
             sum_a = ((a.deep_copy()) >> 28) ^ ((a.deep_copy()) >> 34) ^ ((a.deep_copy()) >> 39)
             sum_e = ((e.deep_copy()) >> 14) ^ ((e.deep_copy()) >> 18) ^ ((e.deep_copy()) >> 41)
-            # TODO2: round base processing
-            #        write your code below
+          
+          # Round base processing
             t1 = BitVector(intVal=(int(h) + int(ch) + int(sum_e) + int(words[i]) + int(K_bv[i])) & \
                                                                                      0xFFFFFFFFFFFFFFFF, size=64)
             t2 = BitVector(intVal=(int(sum_a) + int(maj)) & 0xFFFFFFFFFFFFFFFF, size=64)
@@ -125,9 +108,7 @@ def sha512(input_bv):
             a = BitVector(intVal=(int(t1) + int(t2)) & 0xFFFFFFFFFFFFFFFF, size=64)
 
         
-        # Step 4-3: Updating Hash
-        # TODO3: updating hash
-        #        compete the following code
+        # Step 4-c: Updating Hash
         # 0xFFFFFFFFFFFFFFFF utilize this for 64bit
         h0 = BitVector( intVal = (int(h0) + int(a)) & 0xFFFFFFFFFFFFFFFF, size=64 )
         h1 = BitVector( intVal = (int(h1) + int(b)) & 0xFFFFFFFFFFFFFFFF, size=64 )
