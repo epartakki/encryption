@@ -8,4 +8,4 @@ The Caesar cipher is a basic encryption technique where all letters in a message
 
 ##  SHA-512
 
-To better understand Secure Hash Algoritms (SHA), I used the BitVector module to create an implementation of SHA-512.
+To better understand Secure Hash Algoritms (SHA), I used the BitVector module to create an implementation of SHA-512. In this repo, you can find input.txt that was tested with SHA-512, and the output in output.txt
