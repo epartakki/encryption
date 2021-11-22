@@ -1,4 +1,4 @@
-# Caesar Cipher and SHA512
+# Caesar Cipher and SHA512 for Computer Networks with Shinyoung Cho
 
 In `Python`. 
 
