@@ -1,5 +1,4 @@
-# Caesar Cipher and SHA512 for Computer Networks with Shinyoung Cho
-
+# Caesar Cipher and SHA512 for Computer Networks
 In `Python`. 
 
 ## Implementation of Caesar Cipher
